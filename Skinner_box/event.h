@@ -5,6 +5,7 @@ enum {
 	EVT_NONE,
 	EVT_ON,
 	EVT_OFF,
+	EVT_ONOFF,
 };
 enum {
 	SOUND_SENSOR,
@@ -12,12 +13,18 @@ enum {
 	SENSOR_NUM,
 };
 
-class EvtChecker {
-	public:
-		EvtChecker();
-		void soundcheck();
-		void lightcheck();
-};
+extern uint8_t gb_buzzer_event;
+extern uint8_t gb_sound_event;
 
 
+// class EvtChecker {
+// 	public:
+// 		EvtChecker();
+// 		void soundcheck();
+// 		void lightcheck();
+// };
+
+extern void Event_Main( void );
+extern void Event_Init( void );
+extern void EvtHappenSound( uint8_t event );
 #endif	// EVENT_H

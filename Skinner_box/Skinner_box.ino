@@ -1,11 +1,11 @@
 #include "Arduino.h"
-#include "MsTimer2.h"
 #include "event.h"
 #include "key.h"
 #include "pin.h"
+#include "serial.h"
+#include "Timer.h"
+#include "key.h"
 
-
-uint8_t lc_buzzer_input_event;
 
 // PINのセットアップ
 void pinsetup( void )
@@ -15,15 +15,14 @@ void pinsetup( void )
   pinMode(SOUND_SENSOR_PIN,INPUT);
   pinMode(BUZZER_PIN,OUTPUT);
   digitalWrite(BUZZER_PIN,HIGH);     // BUZZERはLOWアクティブ
-  pinMode(SKINNER_BOX_STATE_LED_PIN,OUTPUT);
-  lc_feed_led_state = LOW;
 }
 // 初期セットアップ
 void setup( void )
 {
   pinsetup();
   Serial_Init();
-  Evetn_Init();
+  Event_Init();
+  Timer_Init();
 }
 
 
@@ -31,4 +30,5 @@ void loop( void )
 {
   Serial_Main();
   Event_Main();
+  Key_Main();
 }

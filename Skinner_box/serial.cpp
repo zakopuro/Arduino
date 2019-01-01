@@ -1,6 +1,8 @@
 #include "Arduino.h"
 #include "serial.h"
-
+#include "pin.h"
+#include "Led.h"
+#include "event.h"
 
 void Serial_Init( void )
 {
@@ -15,15 +17,12 @@ void Serial_Main( void )
 
 	if (inputchar != -1){
 		switch(inputchar){
-		case '1':
-			lc_feed_led_state = !lc_feed_led_state;
-			digitalWrite(FEED_LED_PIN,lc_feed_led_state);
+		case 'l':
+			Led_switch(FEED_LED_PIN);
 			break;
 
-		case '2':
-			digitalWrite(BUZZER_PIN,LOW);
-			delay(10);
-			digitalWrite(BUZZER_PIN,HIGH);
+		case 'b':
+			gb_buzzer_event = EVT_ON;
 			break;
 		}
 	}
