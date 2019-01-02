@@ -15,7 +15,8 @@ enum {
 
 extern uint8_t gb_buzzer_event;
 extern uint8_t gb_sound_event;
-
+extern uint8_t gb_light_event;
+extern uint8_t gb_led_event;
 
 // class EvtChecker {
 // 	public:
@@ -27,4 +28,5 @@ extern uint8_t gb_sound_event;
 extern void Event_Main( void );
 extern void Event_Init( void );
 extern void EvtHappenSound( uint8_t event );
+extern void EvtHappenLight( uint8_t light );
 #endif	// EVENT_H

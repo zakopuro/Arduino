@@ -9,10 +9,12 @@
 // }
 typedef struct {
 	uint16_t	sound	:1;
+	uint16_t	light	:1;
 } KeyStatus_t;
 
 typedef struct {
 	uint16_t	sound	:2;
+	uint16_t	light	:2;
 } KeyEvt_t;
 
 extern KeyStatus_t	gb_KeyStatus;

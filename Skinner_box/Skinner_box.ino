@@ -14,7 +14,7 @@ void pinsetup( void )
   pinMode(LIGHT_SENSOR_PIN,INPUT);
   pinMode(SOUND_SENSOR_PIN,INPUT);
   pinMode(BUZZER_PIN,OUTPUT);
-  digitalWrite(BUZZER_PIN,HIGH);     // BUZZERはLOWアクティブ
+  digitalWrite(BUZZER_PIN,HIGH);	 // BUZZERはLOWアクティブ
 }
 // 初期セットアップ
 void setup( void )
@@ -28,7 +28,7 @@ void setup( void )
 
 void loop( void )
 {
-  Serial_Main();
-  Event_Main();
-  Key_Main();
+  Serial_Main();    // シリアル通信の管理
+  Event_Main();     // イベント処理の管理
+  Key_Main();       // 入力処理の管理
 }

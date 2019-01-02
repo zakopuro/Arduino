@@ -16,11 +16,11 @@ void loop() {
   digitalWrite( trigPin, LOW );
   Duration = pulseIn( echoPin, HIGH ); //センサからの入力
   if (Duration > 0) {
-    Duration = Duration/2; //往復距離を半分にする
-    Distance = Duration*340*100/1000000; // 音速を340m/sに設定
-    Serial.print("Distance:");
-    Serial.print(Distance);
-    Serial.println(" cm");
+	Duration = Duration/2; //往復距離を半分にする
+	Distance = Duration*340*100/1000000; // 音速を340m/sに設定
+	Serial.print("Distance:");
+	Serial.print(Distance);
+	Serial.println(" cm");
   }
   delay(500);
 }

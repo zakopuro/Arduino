@@ -18,7 +18,7 @@ void Serial_Main( void )
 	if (inputchar != -1){
 		switch(inputchar){
 		case 'l':
-			Led_switch(FEED_LED_PIN);
+			gb_led_event	= EVT_ON;
 			break;
 
 		case 'b':
