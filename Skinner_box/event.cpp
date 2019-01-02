@@ -63,9 +63,11 @@ static void evtSoundChk( void )
 
 		gb_skinner_box_state = !gb_skinner_box_state;
 		if (gb_skinner_box_state){
-			Serial.println("POWER ON");
+			Serial.println('P');
+			digitalWrite(SKINNER_BOX_STATE_LED_PIN,HIGH);
 		} else{
-			Serial.println("POWER OFF");
+			Serial.println('Q');
+			digitalWrite(SKINNER_BOX_STATE_LED_PIN,LOW);
 		}
 
 	}
@@ -77,7 +79,10 @@ static void evtLightChk( void )
 	if (gb_light_event == EVT_ON){
 
 		if (gb_skinner_box_state){
-			Serial.println("FEED GET");
+			Serial.println('G');
+			digitalWrite(FEED_GET_LED_PIN,HIGH);
+			delay(500);
+			digitalWrite(FEED_GET_LED_PIN,LOW);
 		} else{
 			// Do Nothing
 		}

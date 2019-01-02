@@ -11,7 +11,14 @@ def main():
 			ser.port = '/dev/'+file
 			ser.open()
 	time.sleep(3)
+	ser.write('b'.encode('utf-8'))
+	time.sleep(3)
 	ser.write('l'.encode('utf-8'))
+	time.sleep(3)
+	ser.write('b'.encode('utf-8'))
+	time.sleep(3)
+	input_char = ser.read_all()
+	print(input_char)
 	ser.close()
 
 if __name__ == "__main__":

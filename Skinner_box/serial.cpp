@@ -1,7 +1,6 @@
 #include "Arduino.h"
 #include "serial.h"
 #include "pin.h"
-#include "Led.h"
 #include "event.h"
 
 void Serial_Init( void )
