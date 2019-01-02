@@ -7,6 +7,7 @@
 #include "key.h"
 
 
+
 // PINのセットアップ
 void pinsetup( void )
 {
@@ -18,6 +19,7 @@ void pinsetup( void )
   pinMode(FEED_GET_LED_PIN,OUTPUT);
   digitalWrite(BUZZER_PIN,HIGH);	 // BUZZERはLOWアクティブ
 }
+
 
 // 初期セットアップ
 void setup( void )
@@ -31,7 +33,7 @@ void setup( void )
 
 void loop( void )
 {
-  Serial_Main();    // シリアル通信の管理
-  Event_Main();     // イベント処理の管理
-  Key_Main();       // 入力処理の管理
+  Serial_Main();	// シリアル通信の管理
+  Event_Main();	 // イベント処理の管理
+  Key_Main();	   // 入力処理の管理
 }

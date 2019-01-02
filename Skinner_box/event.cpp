@@ -2,6 +2,7 @@
 #include "event.h"
 #include "pin.h"
 #include "Timer.h"
+#include "serial.h"
 
 uint8_t gb_buzzer_event;
 uint8_t gb_sound_event;
@@ -31,7 +32,8 @@ void Event_Init( void ){
 static void evtBuzzerChk( void )
 {
 	if( gb_buzzer_event == EVT_ON){
-		analogWrite(BUZZER_PIN,200);
+		// analogWrite(BUZZER_PIN,50);
+		digitalWrite(BUZZER_PIN,LOW);
 		Timer_Buzzer_Start();
 	} else if(gb_buzzer_event == EVT_OFF){
 		analogWrite(BUZZER_PIN,255);
@@ -63,13 +65,11 @@ static void evtSoundChk( void )
 
 		gb_skinner_box_state = !gb_skinner_box_state;
 		if (gb_skinner_box_state){
-			Serial.println('P');
 			digitalWrite(SKINNER_BOX_STATE_LED_PIN,HIGH);
 		} else{
-			Serial.println('Q');
 			digitalWrite(SKINNER_BOX_STATE_LED_PIN,LOW);
 		}
-
+		Serial_print_reward_state( gb_skinner_box_state,false );
 	}
 	gb_sound_event = EVT_NONE;
 }
@@ -79,12 +79,12 @@ static void evtLightChk( void )
 	if (gb_light_event == EVT_ON){
 
 		if (gb_skinner_box_state){
-			Serial.println('G');
 			digitalWrite(FEED_GET_LED_PIN,HIGH);
 			delay(500);
 			digitalWrite(FEED_GET_LED_PIN,LOW);
+			Serial_print_reward_state( gb_skinner_box_state,true );
 		} else{
-			// Do Nothing
+			Serial_print_reward_state( gb_skinner_box_state,false );
 		}
 	}
 	gb_light_event = EVT_NONE;

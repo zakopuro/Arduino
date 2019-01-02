@@ -10,15 +10,12 @@ def main():
 		if "tty.usbmodem" in file:
 			ser.port = '/dev/'+file
 			ser.open()
-	time.sleep(3)
-	ser.write('b'.encode('utf-8'))
-	time.sleep(3)
-	ser.write('l'.encode('utf-8'))
-	time.sleep(3)
-	ser.write('b'.encode('utf-8'))
-	time.sleep(3)
-	input_char = ser.read_all()
-	print(input_char)
+	for i in range(20):
+		time.sleep(2)
+		ser.write('b'.encode('utf-8'))
+		state	= int(ser.read())
+		reward	= int(ser.read())
+		print('state:' , state,'reward:' , reward)
 	ser.close()
 
 if __name__ == "__main__":

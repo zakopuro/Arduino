@@ -5,7 +5,7 @@
 #include "pin.h"
 
 const uint16_t KEY_CHAT_TIME		= 100;			// 通常チャタリングキャンセル時間
-const uint16_t KEY_CHAT_LONG_TIME	= 150;			// 長押しチャタリングキャンセル時間
+const uint16_t KEY_CHAT_LONG_TIME	= 50;			// 長押しチャタリングキャンセル時間
 const uint16_t KEY_CHATTER_MASK		= 0x0007;		// チャタリング
 static uint16_t lc_KeyBuf[SENSOR_NUM];
 KeyStatus_t	gb_KeyStatus;

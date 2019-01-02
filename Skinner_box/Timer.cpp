@@ -10,7 +10,7 @@ uint16_t gb_TM_led;
 uint16_t gb_TM_Key;
 uint16_t gb_TM_Long_Key;
 
-const uint16_t BUZZER_TIME	= 500;
+const uint16_t BUZZER_TIME	= 200;
 const uint16_t LED_TIME	 	= 500;
 
 boolean buzzer_timer_flg;

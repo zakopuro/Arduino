@@ -4,6 +4,10 @@ import chainer
 import chainer.functions as F
 import chainer.links as L
 import chainerrl
+import serial
+import os
+import time
+
 
 class QFunction(chainer.Chain):
 	def __init__(self, obs_size, n_actions, n_hidden_channels=2):
@@ -22,18 +26,18 @@ def random_action():
 	return np.random.choice([0, 1])
 
 def step(state, action):
+
 	reward = 0
-	if state==0:
-		if action==0:
-			state = 1
-		else:
-			state = 0
+	time.sleep(2)
+	if action==0:
+		ser.write('b'.encode('utf-8'))			# ブザーを鳴らして電源をON/OFF
 	else:
-		if action==0:
-			state = 0
-		else:
-			state = 1
-			reward = 1
+		ser.write('l'.encode('utf-8'))			# LEDを光らせて餌を貰う
+	time.sleep(2)
+
+	# arduinoからstateとrewardが送られてくる
+	state	= int(ser.read())
+	reward	= int(ser.read())
 	return np.array([state]), reward
 
 gamma = 0.9
@@ -52,6 +56,15 @@ agent = chainerrl.agents.DQN(
 	replay_start_size=500, update_interval=1, target_update_interval=100, phi=phi)
 #agent.load('agent')
 
+# シリアル通信の設定
+ser = serial.Serial()
+ser.baudrate = 9600
+for file in os.listdir('/dev'):
+	if "tty.usbmodem" in file:
+		ser.port = '/dev/'+file
+		ser.open()
+
+
 for episode in range(num_episodes):  #試行数分繰り返す
 	state = np.array([0])
 	R = 0
@@ -65,6 +78,9 @@ for episode in range(num_episodes):  #試行数分繰り返す
 		R += reward  #報酬を追加
 		state = next_state
 	agent.stop_episode_and_train(state, reward, done)
+	ser.write('r'.encode('utf-8'))
+	time.sleep(2)
 
 	print('episode : %d total reward %d' %(episode+1, R))
+ser.close()
 agent.save('agent')
